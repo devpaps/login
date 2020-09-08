@@ -3,7 +3,7 @@
 	const namn = "test";
 	const lösenord = "1234";
 
-	const checkUserLoggedIn = () => {
+	function checkUserLoggedIn() {
 		// Kollar om användaren finns i localstorage redan.
 		const isUserLoggedIn = localStorage.getItem("user");
 
@@ -94,7 +94,6 @@
 			<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>
 			</div>
 			`;
-
 			
 			const app = document.getElementById("app");
 			app.insertAdjacentHTML("afterbegin", displayWrongInputs);

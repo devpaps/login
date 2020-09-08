@@ -1,0 +1,18 @@
+*, *:before, *:after  {
+  box-sizing:border-box;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type=text], input[type=password] {
+  padding: 5px;
+  margin:0 0 10px;
+}
+
+.button {
+  width: 8em;
+  height: 2em;
+}

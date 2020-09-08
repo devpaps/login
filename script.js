@@ -24,7 +24,7 @@
               <label for="passwordInput">Lösenord</label>
               <input type="password" id="passwordInput">
             </div>
-            <button type="submit" id="loginButton">Logga in</button>
+            <button type="submit" id="loginButton" class="button">Logga in</button>
           </form>
       </div>
     `;
@@ -72,7 +72,7 @@
 		const displayWelcomePage = `
     <div class="welcomePage">
     <h1>Hej och välkommen, ${user}!</h1>
-    <button id="logOut">Logga ut</button>
+    <button id="logOut" class="button">Logga ut</button>
     </div>
     `;
 		// Lägger in det i #app

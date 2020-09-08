@@ -1,6 +1,8 @@
 
 # Inlämning: Skapa en inloggningssida, 10 Yhp
 
+  
+
 ## Kodens funktioner
 
 - Att användaren ska ange sitt namn och lösenord. Är det båda korrekt, så skickas hen vidare till en välkomstsida och hen namn blir lagrat i localstorage.
@@ -47,7 +49,8 @@ jag måste använda mig av när jag gör uppgiften. Sen listade jag upp på papp
 
 ___  
 
-Under tiden som jag kodade så skrev jag upp det som skulle tas tag i, så jag inte glömde bort det medans jag höll på koda något annat. Ett problem jag dök på var när jag skulle lägga in en Eventlistener på min **loggedIn()** funktion så fick ett error, `Uncaught TypeError: Cannot read property 'addEventListener' of null`. Jag använde mig av *template literals*, men det går inte att ha en *onclick* funktion i *template strings*, för att det är ren text. Läste på [stackoverflow]([https://stackoverflow.com/questions/45129421/passing-onclick-event-in-template-literal](https://stackoverflow.com/questions/45129421/passing-onclick-event-in-template-literal)) om att man inte skulle blanda text och inline event handlers som jag hade. Scrollade ner och hittade en lösning på mitt problem. Men där förstod jag inte lösning, han hade heller inte angett varför det funkade. Han använde sig av `window`.
+Under tiden som jag kodade så skrev jag upp det som skulle tas tag i, så jag inte glömde bort det medans jag höll på koda något annat. Ett problem jag dök på var när jag skulle lägga in en Eventlistener på min **loggedIn()** funktion så fick ett error, `Uncaught TypeError: Cannot read property 'addEventListener' of null
+`.  Jag använde mig av *template literals*, men det går inte att ha en *onclick* funktion i *template strings*, för att det är ren text. Läste på [stackoverflow]([https://stackoverflow.com/questions/45129421/passing-onclick-event-in-template-literal](https://stackoverflow.com/questions/45129421/passing-onclick-event-in-template-literal)) om att man inte skulle blanda text och inline event handlers som jag hade. Scrollade ner och hittade en lösning på mitt problem. Men där förstod jag inte lösning, han hade heller inte angett varför det funkade. Han använde sig av `window`.
 
 Jag körde på den lättare vägen genom att lägga in ett `id` på min länk. Sedan skapa en `EventListener` för att ta tillbaka användaren till startsidan.
 
@@ -59,7 +62,8 @@ Min ursprungliga lösning i `wrongSignIn()` funktionen:
 Stackoverflows lösning:
 `window.myFunction = () => {
     console.log('Button clicked');
-};` Som min funktion, på rad 106.
+};
+` Som min funktion, på rad 106.
 Men då skulle jag ha kvar min urprungliga kod med lite modifieringar, såhär: `onclick="backToLoginPage()"`.
 
 Min slutgiltliga lösning:

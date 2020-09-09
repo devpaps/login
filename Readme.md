@@ -1,8 +1,6 @@
 
 # Inlämning: Skapa en inloggningssida, 10 Yhp
 
-  
-
 ## Kodens funktioner
 
 - Att användaren ska ange sitt namn och lösenord. Är det båda korrekt, så skickas hen vidare till en välkomstsida och hen namn blir lagrat i localstorage.
@@ -70,3 +68,12 @@ Min slutgiltliga lösning:
 `<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>`
 plus detta `document.getElementById("tryAgain").addEventListener("click", backToLoginPage);`
 för att kunna lyssna på klicket. Tyckte det var enkelt och snabbt. Visst hade jag kunnat satt mig in i det och läst på om varför jag ska köra på `window` som det var någon på stackoverflow som antydde.
+
+#### Fördelar
+Den här sidan blir snabb och snärtig tack vare **InsertAdjacentHTML** samt **Template Literals**.
+**InsertAdjacentHTML** innebär att den behöver inte serialisera datan och sedan parsa den för att skriva ut elementen som **innerHTML** måste göra. Nu är det här ett extremt litet projekt som inte behöver bifoga tusentals tweets på sidan exempelvis. Då hade man sett skillnad på de olika metoderna. Men jag tycker det är bäst att gå efter dem bästa sätten direkt, även om det är ett litet projekt. Då har man för vana att skriva bra och uppdaterad kod.
+
+**Template Literals** är inte snabbare rent kodmässigt, eller ja det går ju fortare att köra koden då den blir mindre. Sedan skriver man koden snabbare om man jämnför med **CreateElement**. Jag tycker det är ganska mödosamt att köra på det sättet.
+
+#### Nackdelar
+Här har vi några gamla webbläsare som kan ta stryk för att jag använder mig av ovanstående metoder. **Template Literals** funkar på alla webbläsare förutom *Internet Explorer 11* och nedåt samt Opera Mini. Så skulle jag behöva stödja dem, så är jag tvungen att använda mig av **CreateElement** metoden för att skriva ut elementen på webbsidan. 

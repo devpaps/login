@@ -71,11 +71,11 @@
 		// Template strings ES6 används här. Lättare och överskådligare än att köra med createElement¨och appendChild
 		const displayWelcomePage = `
     <div class="welcomePage">
-    <h1>Hej och välkommen, ${user}!</h1>
-    <button id="logOut" class="button">Logga ut</button>
+			<h1>Hej och välkommen, ${user}!</h1>
+			<button id="logOut" class="button">Logga ut</button>
     </div>
     `;
-		// Lägger in det i #app
+		// Lägger in det i #app elementet
 		const app = document.getElementById("app");
 		app.insertAdjacentHTML("afterbegin", displayWelcomePage);
 
@@ -90,17 +90,17 @@
 
 		const displayWrongInputs = `
 			<div class="error">
-			<h1>Oj! Har du glömt ditt lösenord?</h1>
-			<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>
+				<h1>Oj! Har du glömt ditt lösenord?</h1>
+				<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>
 			</div>
 			`;
 			
-			const app = document.getElementById("app");
-			app.insertAdjacentHTML("afterbegin", displayWrongInputs);
-			// Lägger in en EventListener på länken där det står "prova igen"
-			document
-				.getElementById("tryAgain")
-				.addEventListener("click", backToLoginPage);
+		const app = document.getElementById("app");
+		app.insertAdjacentHTML("afterbegin", displayWrongInputs);
+		// Lägger in en EventListener på länken där det står "prova igen"
+		document
+			.getElementById("tryAgain")
+			.addEventListener("click", backToLoginPage);
 	}
 
 	function backToLoginPage() {
@@ -111,5 +111,5 @@
 		location.reload();
 	};
 
-	// Initialization
+	// Initialization, startar här varje gång sidan laddas om.
 	checkUserLoggedIn();

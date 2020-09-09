@@ -104,7 +104,9 @@
 	}
 
 	function backToLoginPage() {
-		if (localStorage.length <= 1) {
+		const checkUser = localStorage.getItem('user');
+		// Kollar om just användaren finns med i localstorage.
+		if (checkUser) {
 			localStorage.removeItem("user");
 		}
 		// Skicka tillbaka till startsidan

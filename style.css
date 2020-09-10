@@ -1,18 +1,168 @@
-*, *:before, *:after  {
-  box-sizing:border-box;
+*, ::before, ::after  {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-font-color: #209cee;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),auto;
+}
+
+body {
+  font-family: 'Press Start 2P', 'Arial';
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  max-width: 1600px;
+  width: 90%;
+  margin: 5em auto 0;
+}
+
+/* STARTSIDAN */
+
+#login-form h1 {
+ text-align: center;
+ margin-bottom: 3em;
+}
+
+#login-form p {
+  text-align: center;
+}
+
+.heads-up-text {
+  color: var(--primary-font-color);
+}
+
+.main-form  {
+  margin: 4em 0;
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+
+}
+
+.usernameField {
+  margin: 2em 0 2em;
+}
+
+.passwordField {
+  margin-bottom: 2em;
 }
 
 label {
   display: block;
   font-weight: bold;
+  margin-bottom: .5rem;
 }
 
 input[type=text], input[type=password] {
+  font-family: inherit;
   padding: 5px;
   margin:0 0 10px;
+  border-image-slice: 2;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(33,37,41)" /></svg>');
+  border-image-outset: 2;
+  padding: .5rem 1rem;
+  margin: 4px;
+  background-clip: padding-box;
 }
 
 .button {
-  width: 8em;
-  height: 2em;
+  border-image-slice: 2;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(33,37,41)" /></svg>');
+  border-image-outset: 2;
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px;
+  margin: 4px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0,pointer;
+  border-style: solid;
+  border-width: 4px;
+  font-family: inherit;
+}
+
+.logo {
+  display: block;
+  max-width: 300px;
+}
+
+/* SLUT STARTSIDAN */
+
+
+
+
+/* INLOGGADSIDAN */
+
+.welcome-page {
+  text-align: center;
+}
+
+.welcome-message {
+  margin-top: 8em;
+}
+
+.welcome-message > p span {
+  vertical-align: super;
+}
+
+.mario {
+  width: 300px;
+  animation: jump 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.mushroom {
+  width: 50px;
+  vertical-align: middle;
+}
+
+@keyframes jump {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-50px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+/* SLUT INLOGGADSIDAN */
+
+
+
+
+/* GLÖMT LÖSENORDSIDAN */
+
+.error {
+  text-align: center;
+}
+
+.mario-died {
+  width: 300px;
+  animation: jump 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+
+
+/* SLUT LÖSENORDSIDAN */
+
+
+
+
+/* MOBILE */
+
+
+@media (max-width: 820px) {
+  .main-form {
+    flex-direction: column-reverse;
+  }
 }

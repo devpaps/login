@@ -12,20 +12,25 @@
 			loggedIn(isUserLoggedIn);
 		} else {
 			const displaySite = `
-      <div id="loginForm">
-				<h1>Välkommen till Din startsida</h1>
-				<p><strong>Vänligen logga in</strong></p>
-          <form>
-            <div class="usernameField">
-              <label for="usernameInput">Namn</label>
-              <input type="text" id="usernameInput" autofocus>
-            </div>
-            <div class="passwordField">
-              <label for="passwordInput">Lösenord</label>
-              <input type="password" id="passwordInput">
-            </div>
-            <button type="submit" id="loginButton" class="button">Logga in</button>
-          </form>
+      <div id="login-form">
+				<h1>Welcome, Employee of the Month</h1>
+				<p><strong class="heads-up-text">Please sign in to receive your bonus</strong></p>
+				<div class="main-form ">
+				<form class="form-input">
+				<div class="usernameField">
+					<label for="usernameInput">Namn</label>
+					<input type="text" id="usernameInput" autofocus>
+				</div>
+				<div class="passwordField">
+					<label for="passwordInput">Lösenord</label>
+					<input type="password" id="passwordInput">
+				</div>
+				<button type="submit" id="loginButton" class="button">Logga in</button>
+				</form>
+				<div>
+					<img src="./nintendo.jpg" class="logo"/>
+				</div>
+				</div>
       </div>
     `;
 
@@ -54,7 +59,7 @@
 			const user = usernameInput.value;
 
 			// Skicka till välkomstsidan
-			const loginForm = document.getElementById("loginForm");
+			const loginForm = document.getElementById("login-form");
 
 			// Tar bort alla element förutom #app
 			loginForm.parentNode.removeChild(loginForm);
@@ -70,9 +75,15 @@
 	function loggedIn(user) {
 		// Template strings ES6 används här. Lättare och överskådligare än att köra med createElement¨och appendChild
 		const displayWelcomePage = `
-    <div class="welcomePage">
-			<h1>Hej och välkommen, ${user}!</h1>
-			<button id="logOut" class="button">Logga ut</button>
+    <div class="welcome-page">
+		<div>
+			<img src="./mario.png" class="mario" />
+		</div>
+			<div class="welcome-message">
+				<h1>You're awesome, ${user}!</h1>
+				<p>Here you go, a magic growing mushroom! <span><img src ="./mushroom.png" class="mushroom"/></span></p>
+				<button id="logOut" class="button">Logga ut</button>
+			</div>
     </div>
     `;
 		// Lägger in det i #app elementet
@@ -85,11 +96,14 @@
 
 	function wrongSignIn() {
 		// Tar bort alla element förutom #app
-		const loginForm = document.getElementById("loginForm");
+		const loginForm = document.getElementById("login-form");
 		loginForm.parentNode.removeChild(loginForm);
 
 		const displayWrongInputs = `
 			<div class="error">
+				<div>
+					<img src="./mario-died.png" class="mario-died"/>
+				</div>
 				<h1>Oj! Har du glömt ditt lösenord?</h1>
 				<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>
 			</div>

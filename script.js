@@ -45,7 +45,7 @@ function checkUserLoggedIn() {
 }
 
 // Validerar namn och lösenord
-function validateNamePassword() {
+function validateNamePassword(event) {
   // Hindrar att sidan laddas om när man klickat på logga in knappen
   event.preventDefault();
 

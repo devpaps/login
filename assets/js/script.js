@@ -4,9 +4,11 @@ async function checkJson() {
   // Kollar om användaren finns i localstorage redan.
   const isUserLoggedIn = localStorage.getItem("user");
 
-   await fetch('./assets/js/users.json')
-  .then( res => res.json())
-  .then(data => {
+  let data = await (await fetch('./assets/js/users.json').catch(checkError)).json();
+  if (data.code && data.code === 400) {
+    alert('Kunde inte ansluta till servern');
+    return;
+  }
     if (isUserLoggedIn) {
       for (let i = 0; i < data.length; i++) {
         const item = data[i];
@@ -18,7 +20,18 @@ async function checkJson() {
     } else {
       checkUserLoggedIn(false);
     }
-  })
+
+}
+
+function checkError(err) {
+  console.error(err);
+  let resp = new Response(
+    JSON.stringify({
+      code: 400,
+      message: "Kan inte ansluta"
+    })
+  )
+  return resp;
 }
 
 function checkUserLoggedIn(check, namn) {
@@ -69,36 +82,35 @@ async function validateNamePassword(event) {
   const usernameInput = document.getElementById("usernameInput");
   const passwordInput = document.getElementById("passwordInput");
 
-  await fetch('./assets/js/users.json')
-  .then(res => res.json())
-  .then(data => {
+  let data = await (await fetch('./assets/js/users.json').catch(checkError)).json();
+  if (data.code && data.code === 400) {
+    alert('Kunde inte ansluta till servern');
+    return;
+  }
     for (let i = 0; i < data.length; i++) {
       const person = data[i];
-            // Kollar med om det användaren skriver in stämmer med de globala variablerna.
-            if (usernameInput.value === person.userLogin && passwordInput.value === person.userPassword) {
-              // Om sant, lagrar det i localstorage.
-              localStorage.setItem("user", person.userLogin);
-          
-              const user = person.userName;
-          
-              // Skicka till välkomstsidan
-              const loginForm = document.getElementById("login-form");
-          
-              // Tar bort alla element förutom #app
-              loginForm.parentNode.removeChild(loginForm);
-          
-              // Skickar med namnet på användaren som argument till loggedIn funktionen.
-              loggedIn(user);
-              break;
-            } else {
-              //Fel lösenord eller namn skicka till "Felsidan".
-              wrongSignIn();
-              break;
-            }
-    }
-
-  })
-
+        // Kollar med om det användaren skriver in stämmer med de globala variablerna.
+        if (usernameInput.value === person.userLogin && passwordInput.value === person.userPassword) {
+          // Om sant, lagrar det i localstorage.
+          localStorage.setItem("user", person.userLogin);
+      
+          const user = person.userName;
+      
+          // Skicka till välkomstsidan
+          const loginForm = document.getElementById("login-form");
+      
+          // Tar bort alla element förutom #app
+          loginForm.parentNode.removeChild(loginForm);
+      
+          // Skickar med namnet på användaren som argument till loggedIn funktionen.
+          loggedIn(user);
+          break;
+        } else {
+          //Fel lösenord eller namn skicka till "Felsidan".
+          wrongSignIn();
+          break;
+        }
+      }
 }
 
 function loggedIn(namn) {

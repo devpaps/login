@@ -1,3 +1,5 @@
+"use strict";
+
 async function checkJson() {
   // Kollar om användaren finns i localstorage redan.
   const isUserLoggedIn = localStorage.getItem("user");

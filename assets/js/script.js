@@ -1,46 +1,46 @@
 "use strict";
 
 async function checkJson() {
-  // Kollar om användaren finns i localstorage redan.
-  const isUserLoggedIn = localStorage.getItem("user");
+	// Kollar om användaren finns i localstorage redan.
+	const isUserLoggedIn = localStorage.getItem("user");
 
-  let data = await (await fetch('./assets/js/users.json').catch(checkError)).json();
-  if (data.code && data.code === 400) {
-    alert('Kunde inte ansluta till servern');
-    return;
-  }
-    if (isUserLoggedIn) {
-      for (let i = 0; i < data.length; i++) {
-        const item = data[i];
-        const te = item.userLogin.includes(isUserLoggedIn);
-        const namn = item.userName;
-        checkUserLoggedIn(te, namn);
-        break;
-      }
-    } else {
-      checkUserLoggedIn(false);
-    }
-
+	let data = await (
+		await fetch("./assets/js/users.json").catch(checkError)
+	).json();
+	if (data.code && data.code === 400) {
+		alert("Kunde inte ansluta till servern");
+		return;
+	}
+	if (isUserLoggedIn) {
+		for (let i = 0; i < data.length; i++) {
+			const item = data[i];
+			const te = item.userLogin.includes(isUserLoggedIn);
+			const namn = item.userName;
+			checkUserLoggedIn(te, namn);
+			break;
+		}
+	} else {
+		checkUserLoggedIn(false);
+	}
 }
 
 function checkError(err) {
-  console.error(err);
-  let resp = new Response(
-    JSON.stringify({
-      code: 400,
-      message: "Kan inte ansluta"
-    })
-  )
-  return resp;
+	console.error(err);
+	let resp = new Response(
+		JSON.stringify({
+			code: 400,
+			message: "Kan inte ansluta",
+		})
+	);
+	return resp;
 }
 
 function checkUserLoggedIn(check, namn) {
-
-  if (check) {
-    // Är användaren redan inloggad, skicka hen till välkomstsidan.
-    loggedIn(namn);
-  } else {
-    const displaySite = `
+	if (check) {
+		// Är användaren redan inloggad, skicka hen till välkomstsidan.
+		loggedIn(namn);
+	} else {
+		const displaySite = `
       <div id="login-form">
 				<header>
 					<h1 class="title">Welcome, Employee of the Month</h1>
@@ -65,57 +65,62 @@ function checkUserLoggedIn(check, namn) {
       </div>
     `;
 
-    document.getElementById("app");
-    app.insertAdjacentHTML("afterbegin", displaySite);
+		document.getElementById("app");
+		app.insertAdjacentHTML("afterbegin", displaySite);
 
-    document
-      .getElementById("loginButton")
-      .addEventListener("click", validateNamePassword);
-  }
+		document
+			.getElementById("loginButton")
+			.addEventListener("click", validateNamePassword);
+	}
 }
 
 // Validerar namn och lösenord
 async function validateNamePassword(event) {
-  // Hindrar att sidan laddas om när man klickat på logga in knappen
-  event.preventDefault();
+	// Hindrar att sidan laddas om när man klickat på logga in knappen
+	event.preventDefault();
 
-  const usernameInput = document.getElementById("usernameInput");
-  const passwordInput = document.getElementById("passwordInput");
+	const usernameInput = document.getElementById("usernameInput");
+	const passwordInput = document.getElementById("passwordInput");
 
-  let data = await (await fetch('./assets/js/users.json').catch(checkError)).json();
-  if (data.code && data.code === 400) {
-    alert('Kunde inte ansluta till servern');
-    return;
-  }
-    for (let i = 0; i < data.length; i++) {
-      const person = data[i];
-        // Kollar med om det användaren skriver in stämmer med de globala variablerna.
-        if (usernameInput.value === person.userLogin && passwordInput.value === person.userPassword) {
-          // Om sant, lagrar det i localstorage.
-          localStorage.setItem("user", person.userLogin);
-      
-          const user = person.userName;
-      
-          // Skicka till välkomstsidan
-          const loginForm = document.getElementById("login-form");
-      
-          // Tar bort alla element förutom #app
-          loginForm.parentNode.removeChild(loginForm);
-      
-          // Skickar med namnet på användaren som argument till loggedIn funktionen.
-          loggedIn(user);
-          break;
-        } else {
-          //Fel lösenord eller namn skicka till "Felsidan".
-          wrongSignIn();
-          break;
-        }
-      }
+	let data = await (
+		await fetch("./assets/js/users.json").catch(checkError)
+	).json();
+	if (data.code && data.code === 400) {
+		alert("Kunde inte ansluta till servern");
+		return;
+	}
+	for (let i = 0; i < data.length; i++) {
+		const person = data[i];
+		// Kollar med om det användaren skriver in stämmer med de globala variablerna.
+		if (
+			usernameInput.value === person.userLogin &&
+			passwordInput.value === person.userPassword
+		) {
+			// Om sant, lagrar det i localstorage.
+			localStorage.setItem("user", person.userLogin);
+
+			const user = person.userName;
+
+			// Skicka till välkomstsidan
+			const loginForm = document.getElementById("login-form");
+
+			// Tar bort alla element förutom #app
+			loginForm.parentNode.removeChild(loginForm);
+
+			// Skickar med namnet på användaren som argument till loggedIn funktionen.
+			loggedIn(user);
+			break;
+		} else {
+			//Fel lösenord eller namn skicka till "Felsidan".
+			wrongSignIn();
+			break;
+		}
+	}
 }
 
 function loggedIn(namn) {
-  // Template strings ES6 används här. Lättare och överskådligare än att köra med createElement¨och appendChild
-  const displayWelcomePage = `
+	// Template strings ES6 används här. Lättare och överskådligare än att köra med createElement¨och appendChild
+	const displayWelcomePage = `
     <div class="welcome-page">
 		<div>
 			<img src="./assets/images/mario.png" class="mario" />
@@ -131,20 +136,20 @@ function loggedIn(namn) {
 			</div>
     </div>
     `;
-  // Lägger in det i #app elementet
-  const app = document.getElementById("app");
-  app.insertAdjacentHTML("afterbegin", displayWelcomePage);
+	// Lägger in det i #app elementet
+	const app = document.getElementById("app");
+	app.insertAdjacentHTML("afterbegin", displayWelcomePage);
 
-  const logOut = document.getElementById("logOut");
-  logOut.addEventListener("click", backToLoginPage);
+	const logOut = document.getElementById("logOut");
+	logOut.addEventListener("click", backToLoginPage);
 }
 
 function wrongSignIn() {
-  // Tar bort alla element förutom #app
-  const loginForm = document.getElementById("login-form");
-  loginForm.parentNode.removeChild(loginForm);
+	// Tar bort alla element förutom #app
+	const loginForm = document.getElementById("login-form");
+	loginForm.parentNode.removeChild(loginForm);
 
-  const displayWrongInputs = `
+	const displayWrongInputs = `
 			<div class="error">
 				<div>
 					<img src="./assets/images/mario-died.png" class="mario-died"/>
@@ -154,22 +159,22 @@ function wrongSignIn() {
 			</div>
 			`;
 
-  const app = document.getElementById("app");
-  app.insertAdjacentHTML("afterbegin", displayWrongInputs);
-  // Lägger in en EventListener på länken där det står "prova igen"
-  document
-    .getElementById("tryAgain")
-    .addEventListener("click", backToLoginPage);
+	const app = document.getElementById("app");
+	app.insertAdjacentHTML("afterbegin", displayWrongInputs);
+	// Lägger in en EventListener på länken där det står "prova igen"
+	document
+		.getElementById("tryAgain")
+		.addEventListener("click", backToLoginPage);
 }
 
 function backToLoginPage() {
-  const checkUser = localStorage.getItem("user");
-  // Kollar om just användaren finns med i localstorage.
-  if (checkUser) {
-    localStorage.removeItem("user");
-  }
-  // Skicka tillbaka till startsidan
-  location.reload();
+	const checkUser = localStorage.getItem("user");
+	// Kollar om just användaren finns med i localstorage.
+	if (checkUser) {
+		localStorage.removeItem("user");
+	}
+	// Skicka tillbaka till startsidan
+	location.reload();
 }
 
 // Initialization, startar här varje gång sidan laddas om.

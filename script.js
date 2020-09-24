@@ -1,14 +1,29 @@
-// Globala variabler
-const namn = "test";
-const lösenord = "1234";
-
-function checkUserLoggedIn() {
+async function checkJson() {
   // Kollar om användaren finns i localstorage redan.
   const isUserLoggedIn = localStorage.getItem("user");
 
-  if (isUserLoggedIn === "test") {
+   await fetch('./users.json')
+  .then( res => res.json())
+  .then(data => {
+    if (isUserLoggedIn) {
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        const te = item.userLogin.includes(isUserLoggedIn);
+        const namn = item.userName;
+        checkUserLoggedIn(te, namn);
+        break;
+      }
+    } else {
+      checkUserLoggedIn(false);
+    }
+  })
+}
+
+function checkUserLoggedIn(check, namn) {
+
+  if (check) {
     // Är användaren redan inloggad, skicka hen till välkomstsidan.
-    loggedIn(isUserLoggedIn);
+    loggedIn(namn);
   } else {
     const displaySite = `
       <div id="login-form">
@@ -45,35 +60,46 @@ function checkUserLoggedIn() {
 }
 
 // Validerar namn och lösenord
-function validateNamePassword(event) {
+async function validateNamePassword(event) {
   // Hindrar att sidan laddas om när man klickat på logga in knappen
   event.preventDefault();
 
   const usernameInput = document.getElementById("usernameInput");
   const passwordInput = document.getElementById("passwordInput");
 
-  // Kollar med om det användaren skriver in stämmer med de globala variablerna.
-  if (usernameInput.value === namn && passwordInput.value === lösenord) {
-    // Om sant, lagrar det i localstorage.
-    localStorage.setItem("user", namn);
+  await fetch('./users.json')
+  .then(res => res.json())
+  .then(data => {
+    for (let i = 0; i < data.length; i++) {
+      const person = data[i];
+            // Kollar med om det användaren skriver in stämmer med de globala variablerna.
+            if (usernameInput.value === person.userLogin && passwordInput.value === person.userPassword) {
+              // Om sant, lagrar det i localstorage.
+              localStorage.setItem("user", person.userLogin);
+          
+              const user = person.userName;
+          
+              // Skicka till välkomstsidan
+              const loginForm = document.getElementById("login-form");
+          
+              // Tar bort alla element förutom #app
+              loginForm.parentNode.removeChild(loginForm);
+          
+              // Skickar med namnet på användaren som argument till loggedIn funktionen.
+              loggedIn(user);
+              break;
+            } else {
+              //Fel lösenord eller namn skicka till "Felsidan".
+              wrongSignIn();
+              break;
+            }
+    }
 
-    const user = usernameInput.value;
+  })
 
-    // Skicka till välkomstsidan
-    const loginForm = document.getElementById("login-form");
-
-    // Tar bort alla element förutom #app
-    loginForm.parentNode.removeChild(loginForm);
-
-    // Skickar med namnet på användaren som argument till loggedIn funktionen.
-    loggedIn(user);
-  } else {
-    //Fel lösenord eller namn skicka till "Felsidan".
-    wrongSignIn();
-  }
 }
 
-function loggedIn(user) {
+function loggedIn(namn) {
   // Template strings ES6 används här. Lättare och överskådligare än att köra med createElement¨och appendChild
   const displayWelcomePage = `
     <div class="welcome-page">
@@ -82,7 +108,7 @@ function loggedIn(user) {
 		</div>
 			<div class="welcome-message">
 				<header>
-					<h1 class="title">You're awesome, ${user}!</h1>
+					<h1 class="title">You're awesome, ${namn}!</h1>
 				</header>
 				<div class="dialog">
 					<p>Here you go, a magic growing mushroom! <span><img src ="./mushroom.png" class="mushroom"/></span></p>
@@ -133,4 +159,4 @@ function backToLoginPage() {
 }
 
 // Initialization, startar här varje gång sidan laddas om.
-checkUserLoggedIn();
+window.onload = checkJson;

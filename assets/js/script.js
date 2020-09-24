@@ -2,7 +2,7 @@ async function checkJson() {
   // Kollar om användaren finns i localstorage redan.
   const isUserLoggedIn = localStorage.getItem("user");
 
-   await fetch('./users.json')
+   await fetch('/assets/js/users.json')
   .then( res => res.json())
   .then(data => {
     if (isUserLoggedIn) {
@@ -44,7 +44,7 @@ function checkUserLoggedIn(check, namn) {
 				<button type="submit" id="loginButton" class="button-login">Logga in</button>
 				</form>
 				<div>
-					<img src="./nintendo.jpg" class="logo"/>
+					<img src="../../assets/images/nintendo.jpg" class="logo"/>
 				</div>
 				</div>
       </div>
@@ -67,7 +67,7 @@ async function validateNamePassword(event) {
   const usernameInput = document.getElementById("usernameInput");
   const passwordInput = document.getElementById("passwordInput");
 
-  await fetch('./users.json')
+  await fetch('/assets/js/users.json')
   .then(res => res.json())
   .then(data => {
     for (let i = 0; i < data.length; i++) {
@@ -104,14 +104,14 @@ function loggedIn(namn) {
   const displayWelcomePage = `
     <div class="welcome-page">
 		<div>
-			<img src="./mario.png" class="mario" />
+			<img src="../../assets/images/mario.png" class="mario" />
 		</div>
 			<div class="welcome-message">
 				<header>
 					<h1 class="title">You're awesome, ${namn}!</h1>
 				</header>
 				<div class="dialog">
-					<p>Here you go, a magic growing mushroom! <span><img src ="./mushroom.png" class="mushroom"/></span></p>
+					<p>Here you go, a magic growing mushroom! <span><img src ="../../assets/images/mushroom.png" class="mushroom"/></span></p>
 				</div>
 				<button id="logOut" class="button-logout">Logga ut</button>
 			</div>
@@ -133,7 +133,7 @@ function wrongSignIn() {
   const displayWrongInputs = `
 			<div class="error">
 				<div>
-					<img src="./mario-died.png" class="mario-died"/>
+					<img src="../../assets/images/mario-died.png" class="mario-died"/>
 				</div>
 				<h1>Oj! Har du glömt ditt lösenord?</h1>
 				<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>

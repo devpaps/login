@@ -46,7 +46,7 @@ function checkUserLoggedIn(check, namn) {
 				<button type="submit" id="loginButton" class="button-login">Logga in</button>
 				</form>
 				<div>
-					<img src="./assets/images/nintendo.jpg" class="logo"/>
+					<img src="../images/nintendo.jpg" class="logo"/>
 				</div>
 				</div>
       </div>
@@ -106,14 +106,14 @@ function loggedIn(namn) {
   const displayWelcomePage = `
     <div class="welcome-page">
 		<div>
-			<img src="./assets/images/mario.png" class="mario" />
+			<img src="../images/mario.png" class="mario" />
 		</div>
 			<div class="welcome-message">
 				<header>
 					<h1 class="title">You're awesome, ${namn}!</h1>
 				</header>
 				<div class="dialog">
-					<p>Here you go, a magic growing mushroom! <span><img src ="./assets/images/mushroom.png" class="mushroom"/></span></p>
+					<p>Here you go, a magic growing mushroom! <span><img src ="../images/mushroom.png" class="mushroom"/></span></p>
 				</div>
 				<button id="logOut" class="button-logout">Logga ut</button>
 			</div>
@@ -135,7 +135,7 @@ function wrongSignIn() {
   const displayWrongInputs = `
 			<div class="error">
 				<div>
-					<img src="./assets/images/mario-died.png" class="mario-died"/>
+					<img src="../images/mario-died.png" class="mario-died"/>
 				</div>
 				<h1>Oj! Har du glömt ditt lösenord?</h1>
 				<h2>Vänligen <a href="#" id="tryAgain">prova igen</a>.</h2>

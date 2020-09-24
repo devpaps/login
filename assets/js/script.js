@@ -2,7 +2,7 @@ async function checkJson() {
   // Kollar om användaren finns i localstorage redan.
   const isUserLoggedIn = localStorage.getItem("user");
 
-   await fetch('./users.json')
+   await fetch('../../assets/js/users.json')
   .then( res => res.json())
   .then(data => {
     if (isUserLoggedIn) {
@@ -67,7 +67,7 @@ async function validateNamePassword(event) {
   const usernameInput = document.getElementById("usernameInput");
   const passwordInput = document.getElementById("passwordInput");
 
-  await fetch('./users.json')
+  await fetch('../../assets/js/users.json')
   .then(res => res.json())
   .then(data => {
     for (let i = 0; i < data.length; i++) {
